@@ -109,7 +109,7 @@ export const BudgetOverview: React.FC = () => {
 
         <div className="p-6 border-2 border-gray-100 rounded-xl space-y-6">
           <div className="flex items-center justify-between">
-            <h4 className="text-medium font-semibold text-gray-900">Family Members (0)</h4>
+            <h4 className="text-medium font-semibold text-gray-900">Family Members (2)</h4>
             <button className="flex items-center gap-2 text-sm font-small px-4 py-2 rounded-md shadow text-[#3361ec] border border-[#3361ec] opacity-60">
               <IoSettingsOutline className="w-4 h-4" />
               Manage Permissions

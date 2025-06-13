@@ -161,7 +161,23 @@ export const mockAIInsights: AIInsight[] = [
     description: 'You\'re approaching 75% of your transportation budget with 2 weeks left in the month. Consider carpooling or using public transport.',
     actionable: true,
     category: 'budgeting'
-  }
+  },
+  {
+  id: "opportunity-1",
+  type: "opportunity",
+  title: "Lower Your Energy Bill",
+  description: "By switching to a time-of-use plan, you could save $120 monthly.",
+  category: "Utilities",
+  actionable: true,
+  suggestions: [
+    "Invest the $120 in a high-yield savings account",
+    "Use it to pay off debt faster",
+    "Start a rainy day fund",
+    "Enroll in an online course",
+    "Build up a travel fund"
+  ]
+}
+
 ];
 
 export const mockEducationalModules: EducationalModule[] = [
