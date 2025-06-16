@@ -11,6 +11,8 @@ import { AIInsights } from './components/Insights/AIInsights';
 import { EducationModules } from './components/Education/EducationModules';
 import { IncomeOverview } from './components/Income/IncomeOverview';
 import { ExpenseOverview } from './components/Expenses/ExpenseOverview';
+import { AccountsOverview } from './components/Accounts/AccountsOverview';
+import { ProfileOverview } from './components/Profile/ProfileOverview';
 import { Alert } from './components/ui/Alert';
 import { mockIncomeSources, mockExpenses } from './utils/mockData';
 import { IncomeSource, Expense } from './types';
@@ -176,6 +178,26 @@ function App() {
               <p className="text-gray-600">Learn and master financial concepts with interactive modules.</p>
             </div>
             <EducationModules />
+          </div>
+        );
+      case 'accounts':
+        return (
+          <div className="space-y-8">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">Account Management</h1>
+              <p className="text-gray-600">Manage all your financial accounts in one place.</p>
+            </div>
+            <AccountsOverview />
+          </div>
+        );
+      case 'profile':
+        return (
+          <div className="space-y-8">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">Profile & Settings</h1>
+              <p className="text-gray-600">Manage your personal information and account preferences.</p>
+            </div>
+            <ProfileOverview />
           </div>
         );
       default:

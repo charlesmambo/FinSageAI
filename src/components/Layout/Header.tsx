@@ -2,7 +2,12 @@ import React from 'react';
 import { Bell, Settings, User, Search } from 'lucide-react';
 import { Button } from '../ui/Button';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  onTabChange: (tab: string) => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ onTabChange }) => {
+  
   return (
     <header className="bg-white border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between">
@@ -33,7 +38,11 @@ export const Header: React.FC = () => {
           <Button variant="ghost" size="sm" icon={<Settings className="w-4 h-4" />}>
             <span className="sr-only">Settings</span>
           </Button>
-          <Button variant="ghost" size="sm" icon={<User className="w-4 h-4" />}>
+            <Button 
+            variant="ghost" 
+            size="sm" 
+            icon={<User className="w-4 h-4" />} 
+          >
             Profile
           </Button>
         </div>
