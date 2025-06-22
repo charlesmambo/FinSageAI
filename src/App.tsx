@@ -13,6 +13,7 @@ import { IncomeOverview } from './components/Income/IncomeOverview';
 import { ExpenseOverview } from './components/Expenses/ExpenseOverview';
 import { AccountsOverview } from './components/Accounts/AccountsOverview';
 import { ProfileOverview } from './components/Profile/ProfileOverview';
+import { HelpOverview } from './components/Help/HelpOverview';
 import { Alert } from './components/ui/Alert';
 import { mockIncomeSources, mockExpenses } from './utils/mockData';
 import { IncomeSource, Expense } from './types';
@@ -198,6 +199,12 @@ function App() {
               <p className="text-gray-600">Manage your personal information and account preferences.</p>
             </div>
             <ProfileOverview />
+          </div>
+        );
+      case 'help':
+        return (
+          <div className="space-y-8">
+            <HelpOverview />
           </div>
         );
       default:

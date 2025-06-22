@@ -10,9 +10,22 @@ export interface Transaction {
 export interface BudgetCategory {
   id: string;
   name: string;
+  description?: string;
   budgeted: number;
   spent: number;
   color: string;
+  icon: string;
+}
+
+export interface BudgetPlan {
+  id: string;
+  name: string;
+  description?: string;
+  period: 'weekly' | 'monthly' | 'quarterly' | 'annually';
+  categories: BudgetCategory[];
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Investment {
@@ -79,6 +92,17 @@ export interface Expense {
   isRecurring: boolean;
   frequency?: 'daily' | 'weekly' | 'monthly' | 'annually';
   tags?: string[];
+  receiptData?: {
+    merchant: string;
+    items: Array<{
+      name: string;
+      quantity: number;
+      price: number;
+    }>;
+    taxAmount?: number;
+    paymentMethod?: string;
+    confidence: number;
+  };
 }
 
 export interface ExpenseCategory {
@@ -243,4 +267,19 @@ export interface SecuritySettings {
   sessionTimeout: number;
   loginNotifications: boolean;
   deviceTrust: boolean;
+}
+
+export interface ReceiptData {
+  merchant: string;
+  amount: number;
+  date: string;
+  category: string;
+  items: Array<{
+    name: string;
+    quantity: number;
+    price: number;
+  }>;
+  taxAmount?: number;
+  paymentMethod?: string;
+  confidence: number;
 }

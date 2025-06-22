@@ -1,4 +1,4 @@
-import { Transaction, BudgetCategory, Investment, FinancialGoal, AIInsight, EducationalModule, IncomeSource, Expense, Account, AccountTransaction, UserProfile } from '../types';
+import { Transaction, BudgetCategory, Investment, FinancialGoal, AIInsight, EducationalModule, IncomeSource, Expense, Account, AccountTransaction, UserProfile, BudgetPlan } from '../types';
 
 export const mockTransactions: Transaction[] = [
   {
@@ -71,6 +71,154 @@ export const mockBudgetCategories: BudgetCategory[] = [
     budgeted: 1800,
     spent: 1450,
     color: '#ef4444'
+  }
+];
+
+export const mockBudgetPlans: BudgetPlan[] = [
+  {
+    id: '1',
+    name: 'Monthly Budget 2024',
+    totalBudget: 35000,
+    period: 'monthly',
+    startDate: '2024-01-01',
+    endDate: '2024-01-31',
+    categories: [
+      {
+        id: '1',
+        name: 'Housing',
+        budgeted: 12000,
+        spent: 12000,
+        color: '#ef4444'
+      },
+      {
+        id: '2',
+        name: 'Groceries',
+        budgeted: 4000,
+        spent: 2850,
+        color: '#10b981'
+      },
+      {
+        id: '3',
+        name: 'Transportation',
+        budgeted: 2500,
+        spent: 1830,
+        color: '#3b82f6'
+      },
+      {
+        id: '4',
+        name: 'Entertainment',
+        budgeted: 1500,
+        spent: 1199,
+        color: '#f59e0b'
+      },
+      {
+        id: '5',
+        name: 'Utilities',
+        budgeted: 1800,
+        spent: 1450,
+        color: '#8b5cf6'
+      },
+      {
+        id: '6',
+        name: 'Savings',
+        budgeted: 8000,
+        spent: 8000,
+        color: '#06b6d4'
+      },
+      {
+        id: '7',
+        name: 'Insurance',
+        budgeted: 2500,
+        spent: 2500,
+        color: '#84cc16'
+      },
+      {
+        id: '8',
+        name: 'Healthcare',
+        budgeted: 1500,
+        spent: 850,
+        color: '#f97316'
+      },
+      {
+        id: '9',
+        name: 'Personal Care',
+        budgeted: 800,
+        spent: 450,
+        color: '#ec4899'
+      },
+      {
+        id: '10',
+        name: 'Miscellaneous',
+        budgeted: 400,
+        spent: 280,
+        color: '#6b7280'
+      }
+    ],
+    isActive: true,
+    createdAt: '2024-01-01',
+    updatedAt: '2024-01-15'
+  },
+  {
+    id: '2',
+    name: 'Emergency Budget Plan',
+    totalBudget: 25000,
+    period: 'monthly',
+    startDate: '2024-02-01',
+    endDate: '2024-02-29',
+    categories: [
+      {
+        id: '1',
+        name: 'Housing',
+        budgeted: 12000,
+        spent: 0,
+        color: '#ef4444'
+      },
+      {
+        id: '2',
+        name: 'Groceries',
+        budgeted: 3000,
+        spent: 0,
+        color: '#10b981'
+      },
+      {
+        id: '3',
+        name: 'Transportation',
+        budgeted: 1500,
+        spent: 0,
+        color: '#3b82f6'
+      },
+      {
+        id: '4',
+        name: 'Utilities',
+        budgeted: 1800,
+        spent: 0,
+        color: '#8b5cf6'
+      },
+      {
+        id: '5',
+        name: 'Healthcare',
+        budgeted: 2000,
+        spent: 0,
+        color: '#f97316'
+      },
+      {
+        id: '6',
+        name: 'Insurance',
+        budgeted: 2500,
+        spent: 0,
+        color: '#84cc16'
+      },
+      {
+        id: '7',
+        name: 'Emergency Fund',
+        budgeted: 2200,
+        spent: 0,
+        color: '#06b6d4'
+      }
+    ],
+    isActive: false,
+    createdAt: '2024-01-15',
+    updatedAt: '2024-01-15'
   }
 ];
 
