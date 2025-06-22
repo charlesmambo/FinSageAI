@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Plus, DollarSign, TrendingDown, Calendar, Filter, Search, Trash2, Edit } from 'lucide-react';
+import { Plus, DollarSign, TrendingDown, Calendar, Filter, Search, Trash2, Edit, Camera, Receipt } from 'lucide-react';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 import { Select } from '../ui/Select';
 import { ExpenseModal } from './ExpenseModal';
+import { ReceiptScanner } from './ReceiptScanner';
 import { formatCurrency, formatDate } from '../../utils/helpers';
 import { Expense } from '../../types';
 
@@ -22,6 +23,7 @@ export const ExpenseOverview: React.FC<ExpenseOverviewProps> = ({
   onDeleteExpense
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('');
   const [filterPeriod, setFilterPeriod] = useState('this-month');
@@ -105,10 +107,11 @@ export const ExpenseOverview: React.FC<ExpenseOverviewProps> = ({
   const totalExpenses = filteredExpenses.reduce((sum, expense) => sum + expense.amount, 0);
   const averageExpense = filteredExpenses.length > 0 ? totalExpenses / filteredExpenses.length : 0;
   const recurringExpenses = filteredExpenses.filter(expense => expense.isRecurring);
+  const scannedExpenses = filteredExpenses.filter(expense => expense.tags?.includes('scanned'));
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <Card className="bg-gradient-to-br from-error-50 to-error-100">
           <div className="flex items-center justify-between">
             <div>
@@ -138,19 +141,39 @@ export const ExpenseOverview: React.FC<ExpenseOverviewProps> = ({
             <Calendar className="w-8 h-8 text-secondary-600" />
           </div>
         </Card>
+
+        <Card className="bg-gradient-to-br from-primary-50 to-primary-100">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-primary-700">Scanned Receipts</p>
+              <p className="text-2xl font-bold text-primary-900">{scannedExpenses.length}</p>
+            </div>
+            <Receipt className="w-8 h-8 text-primary-600" />
+          </div>
+        </Card>
       </div>
 
       <Card>
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
           <h3 className="text-lg font-semibold text-gray-900">Expense Tracking</h3>
-          <Button
-            variant="primary"
-            size="sm"
-            icon={<Plus className="w-4 h-4" />}
-            onClick={() => setIsModalOpen(true)}
-          >
-            Add Expense
-          </Button>
+          <div className="flex space-x-2">
+            <Button
+              variant="outline"
+              size="sm"
+              icon={<Camera className="w-4 h-4" />}
+              onClick={() => setIsScannerOpen(true)}
+            >
+              Scan Receipt
+            </Button>
+            <Button
+              variant="primary"
+              size="sm"
+              icon={<Plus className="w-4 h-4" />}
+              onClick={() => setIsModalOpen(true)}
+            >
+              Add Expense
+            </Button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
@@ -184,13 +207,22 @@ export const ExpenseOverview: React.FC<ExpenseOverviewProps> = ({
                 : "Try adjusting your search or filter criteria."
               }
             </p>
-            <Button
-              variant="primary"
-              icon={<Plus className="w-4 h-4" />}
-              onClick={() => setIsModalOpen(true)}
-            >
-              Add Your First Expense
-            </Button>
+            <div className="flex justify-center space-x-3">
+              <Button
+                variant="outline"
+                icon={<Camera className="w-4 h-4" />}
+                onClick={() => setIsScannerOpen(true)}
+              >
+                Scan Receipt
+              </Button>
+              <Button
+                variant="primary"
+                icon={<Plus className="w-4 h-4" />}
+                onClick={() => setIsModalOpen(true)}
+              >
+                Add Expense Manually
+              </Button>
+            </div>
           </div>
         ) : (
           <div className="space-y-3">
@@ -214,11 +246,17 @@ export const ExpenseOverview: React.FC<ExpenseOverviewProps> = ({
                           {expense.frequency}
                         </span>
                       )}
+                      {expense.tags?.includes('scanned') && (
+                        <span className="px-2 py-1 text-xs rounded-full bg-secondary-100 text-secondary-700 flex items-center">
+                          <Receipt className="w-3 h-3 mr-1" />
+                          Scanned
+                        </span>
+                      )}
                     </div>
                     <p className="text-sm text-gray-500">{formatDate(expense.date)}</p>
                     {expense.tags && expense.tags.length > 0 && (
                       <div className="flex flex-wrap gap-1 mt-1">
-                        {expense.tags.map((tag, index) => (
+                        {expense.tags.filter(tag => tag !== 'scanned').map((tag, index) => (
                           <span
                             key={index}
                             className="px-2 py-0.5 text-xs bg-gray-200 text-gray-600 rounded"
@@ -263,6 +301,12 @@ export const ExpenseOverview: React.FC<ExpenseOverviewProps> = ({
       <ExpenseModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        onSubmit={onAddExpense}
+      />
+
+      <ReceiptScanner
+        isOpen={isScannerOpen}
+        onClose={() => setIsScannerOpen(false)}
         onSubmit={onAddExpense}
       />
     </div>
